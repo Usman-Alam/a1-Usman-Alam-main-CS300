@@ -13,6 +13,7 @@ data Direction = North | South | East | West deriving (Show, Eq)
 -- -----------------------------Category: Easy--------------------------------
 -- ---------------------------------------------------------------------------
 
+-- testing commit
 
 matrixMultiplication :: [[Int]] -> [[Int]] -> [[Int]]
 matrixMultiplication a b
@@ -31,6 +32,8 @@ matrixMultiplication a b
 
     dotProduct :: [Int] -> [Int] -> Int
     dotProduct v1 v2 = sum (zipWith (*) v1 v2)
+
+    
 -- Question 2
 
 
