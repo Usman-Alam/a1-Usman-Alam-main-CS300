@@ -1,0 +1,28 @@
+name: Autograding
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Haskell
+        uses: haskell/actions/setup@v2
+        with:
+          ghc-version: '9.2.8'
+          cabal-version: '3.6.2.0'
+
+      - name: Install Dependencies
+        run: cabal update && cabal install --lib HUnit
+
+      - name: Run Tests
+        run: runhaskell runTests.hs | tee result.log
+
+      - name: Extract Score
+        run: |
+          SCORE=$(grep 'Score:' result.log | awk '{print $2}')
+          echo "Final Score: $SCORE/64"
